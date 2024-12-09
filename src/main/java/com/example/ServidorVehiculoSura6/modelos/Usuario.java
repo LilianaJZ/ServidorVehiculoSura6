@@ -34,6 +34,8 @@ public class Usuario {
 
 
     //constructores
+    public Usuario() {
+    }
 
     public Usuario(Long id, String cedula, String nombres, String telefono, String direccion, String correo, String contrasena, LocalDate fechaNacimiento) {
         this.id = id;
