@@ -31,13 +31,13 @@ public class Usuario {
     private String contrasena;
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
-
+    private Boolean activo;
 
     //constructores
     public Usuario() {
     }
 
-    public Usuario(Long id, String cedula, String nombres, String telefono, String direccion, String correo, String contrasena, LocalDate fechaNacimiento) {
+    public Usuario(Long id, String cedula, String nombres, String telefono, String direccion, String correo, String contrasena, LocalDate fechaNacimiento, Boolean activo) {
         this.id = id;
         this.cedula = cedula;
         this.nombres = nombres;
@@ -46,10 +46,10 @@ public class Usuario {
         this.correo = correo;
         this.contrasena = contrasena;
         this.fechaNacimiento = fechaNacimiento;
+        this.activo = activo;
     }
-
-
     //encapsulamiento
+
 
     public Long getId() {
         return id;
@@ -113,5 +113,13 @@ public class Usuario {
 
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
 }

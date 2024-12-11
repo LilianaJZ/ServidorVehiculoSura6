@@ -30,13 +30,15 @@ public class Vehiculo {
 
     @Column(name = "numero_siniestros")
     private Integer numeroSiniestro;
+    private Boolean activo;
 
     // Constructor sin parámetros (requerido por JPA)
     public Vehiculo() {
     }
 
     // Constructor con todos los parámetros
-    public Vehiculo(Long id, String placa, String modelo, String marca, String cilindraje, String color, String descripcion, Integer numeroSiniestro) {
+
+    public Vehiculo(Long id, String placa, String modelo, String marca, String cilindraje, String color, String descripcion, Integer numeroSiniestro, Boolean activo) {
         this.id = id;
         this.placa = placa;
         this.modelo = modelo;
@@ -45,10 +47,12 @@ public class Vehiculo {
         this.color = color;
         this.descripcion = descripcion;
         this.numeroSiniestro = numeroSiniestro;
+        this.activo = activo;
     }
 
 
     // Encapsulamiento
+
     public Long getId() {
         return id;
     }
@@ -111,5 +115,13 @@ public class Vehiculo {
 
     public void setNumeroSiniestro(Integer numeroSiniestro) {
         this.numeroSiniestro = numeroSiniestro;
+    }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
 }
