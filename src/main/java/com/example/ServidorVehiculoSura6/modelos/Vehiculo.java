@@ -1,4 +1,5 @@
 package com.example.ServidorVehiculoSura6.modelos;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 
@@ -31,6 +32,12 @@ public class Vehiculo {
     @Column(name = "numero_siniestros")
     private Integer numeroSiniestro;
     private Boolean activo;
+
+    //
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "fk_usuario", referencedColumnName = "id")
+    private Usuario usuario;
 
     // Constructor sin parámetros (requerido por JPA)
     public Vehiculo() {

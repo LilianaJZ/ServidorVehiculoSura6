@@ -1,8 +1,10 @@
 package com.example.ServidorVehiculoSura6.modelos;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
@@ -32,6 +34,11 @@ public class Usuario {
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
     private Boolean activo;
+
+    //Las relaciones serán nuevos atributos
+    @OneToMany
+    @JsonManagedReference
+    private List<Vehiculo> vehiculos;
 
     //constructores
     public Usuario() {

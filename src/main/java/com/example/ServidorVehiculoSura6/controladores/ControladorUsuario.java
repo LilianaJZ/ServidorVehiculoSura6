@@ -46,5 +46,20 @@ public class ControladorUsuario {
         }
 
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscarPorId(@PathVariable Long id){
+        try{
+            return  ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(usuarioServicio.buscarUsuarioPorId(id));
+        }
+        catch (Exception error){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(error.getMessage());
+        }
+    }
+
 }
 

@@ -43,4 +43,18 @@ public class ControladorVehiculo {
                     .body(error.getMessage());
         }
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscarPorId(@PathVariable Long id){
+        try{
+            return  ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(vehiculoServicio.buscarVehiculoPorId(id));
+        }
+        catch (Exception error){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(error.getMessage());
+        }
+    }
 }
