@@ -36,7 +36,7 @@ public class Usuario {
     private Boolean activo;
 
     //Las relaciones serán nuevos atributos
-    @OneToMany
+    @OneToMany(mappedBy = "usuario")
     @JsonManagedReference
     private List<Vehiculo> vehiculos;
 
