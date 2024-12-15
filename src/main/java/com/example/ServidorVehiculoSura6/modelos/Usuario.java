@@ -14,25 +14,23 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "documento_usuario", nullable = false, length = 50)
-    private String cedula;
+    @Column(nullable = false, length = 50)
+    private String nombre;
 
-    @Column(name = "nombre_usuario", nullable = false, length = 50)
-    private String nombres;
+    @Column(nullable = false, length = 20)
+    private String contrasena;
 
     @Column(length = 20)
     private String telefono;
 
-    @Column(name = "direccion_usuario", length = 100)
-    private String direccion;
+    @Column(nullable = false, length = 50)
+    private String cedula;
 
-    @Column(name = "e_mail", nullable = false, length = 50)
+    @Column(nullable = false, length = 50)
     private String correo;
 
-    @Column(name = "clave", nullable = false, length = 20)
-    private String contrasena;
-    @Column(name = "fecha_nacimiento")
-    private LocalDate fechaNacimiento;
+    private LocalDate fecha_nacimiento;
+
     private Boolean activo;
 
     //Las relaciones serán nuevos atributos
@@ -40,21 +38,23 @@ public class Usuario {
     @JsonManagedReference
     private List<Vehiculo> vehiculos;
 
-    //constructores
+    //constructor vacío
     public Usuario() {
     }
+    //constructores
 
-    public Usuario(Long id, String cedula, String nombres, String telefono, String direccion, String correo, String contrasena, LocalDate fechaNacimiento, Boolean activo) {
+    public Usuario(Long id, String nombre, String contrasena, String telefono, String cedula, String correo, LocalDate fecha_nacimiento, Boolean activo) {
         this.id = id;
-        this.cedula = cedula;
-        this.nombres = nombres;
-        this.telefono = telefono;
-        this.direccion = direccion;
-        this.correo = correo;
+        this.nombre = nombre;
         this.contrasena = contrasena;
-        this.fechaNacimiento = fechaNacimiento;
+        this.telefono = telefono;
+        this.cedula = cedula;
+        this.correo = correo;
+        this.fecha_nacimiento = fecha_nacimiento;
         this.activo = activo;
     }
+
+
     //encapsulamiento
 
 
@@ -66,44 +66,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getCedula() {
-        return cedula;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getContrasena() {
@@ -114,12 +82,36 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public LocalDate getFecha_nacimiento() {
+        return fecha_nacimiento;
+    }
+
+    public void setFecha_nacimiento(LocalDate fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
     }
 
     public Boolean getActivo() {

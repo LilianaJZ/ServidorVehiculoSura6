@@ -5,6 +5,7 @@ import com.example.ServidorVehiculoSura6.repositorios.IUsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,8 @@ public class UsuarioServicio {
     //1. Registrar o guardar un usuario.
     public Usuario guardarUsuario(Usuario datosUsuario)throws Exception {// se llama a usuario porque es donde lo quiero hacer y se le activan las excepciones
         try {
+
+            //datosUsuario.setFechaCreacion(LocalDate.now());
             return iUsuarioRepositorio.save(datosUsuario);
         } catch (Exception error) {
             throw new Exception(error.getMessage());

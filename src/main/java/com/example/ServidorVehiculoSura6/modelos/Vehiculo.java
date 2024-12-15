@@ -11,26 +11,27 @@ public class Vehiculo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 10)
-    private String placa;
-
-    @Column(nullable = false, length = 4)
-    private String modelo;
-
-    @Column(nullable = false, length = 20)
-    private String marca;
-
     @Column(nullable = false, length = 4)
     private String cilindraje;
 
     @Column(nullable = false, length = 20)
     private String color;
 
+    @Column(nullable = false, length = 20)
+    private String marca;
+
+    @Column(nullable = false, length = 4)
+    private String modelo;
+
+    private Integer siniestros;
+
+    @Column(nullable = false, length = 10)
+    private String placa;
+
     @Column(length = 255)
     private String descripcion;
-
-    @Column(name = "numero_siniestros")
-    private Integer numeroSiniestro;
+    @Column(length = 255)
+    private String poliza;
     private Boolean activo;
 
     //
@@ -45,20 +46,23 @@ public class Vehiculo {
 
     // Constructor con todos los parámetros
 
-    public Vehiculo(Long id, String placa, String modelo, String marca, String cilindraje, String color, String descripcion, Integer numeroSiniestro, Boolean activo) {
+    public Vehiculo(Long id, String cilindraje, String color, String marca, String modelo, Integer siniestros, String placa, String descripcion, String poliza, Boolean activo, Usuario usuario) {
         this.id = id;
-        this.placa = placa;
-        this.modelo = modelo;
-        this.marca = marca;
         this.cilindraje = cilindraje;
         this.color = color;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.siniestros = siniestros;
+        this.placa = placa;
         this.descripcion = descripcion;
-        this.numeroSiniestro = numeroSiniestro;
+        this.poliza = poliza;
         this.activo = activo;
+        this.usuario = usuario;
     }
 
 
     // Encapsulamiento
+
 
     public Long getId() {
         return id;
@@ -66,30 +70,6 @@ public class Vehiculo {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getPlaca() {
-        return placa;
-    }
-
-    public void setPlaca(String placa) {
-        this.placa = placa;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
     }
 
     public String getCilindraje() {
@@ -108,6 +88,38 @@ public class Vehiculo {
         this.color = color;
     }
 
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public Integer getSiniestros() {
+        return siniestros;
+    }
+
+    public void setSiniestros(Integer siniestros) {
+        this.siniestros = siniestros;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -116,12 +128,12 @@ public class Vehiculo {
         this.descripcion = descripcion;
     }
 
-    public Integer getNumeroSiniestro() {
-        return numeroSiniestro;
+    public String getPoliza() {
+        return poliza;
     }
 
-    public void setNumeroSiniestro(Integer numeroSiniestro) {
-        this.numeroSiniestro = numeroSiniestro;
+    public void setPoliza(String poliza) {
+        this.poliza = poliza;
     }
 
     public Boolean getActivo() {
@@ -130,5 +142,13 @@ public class Vehiculo {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
