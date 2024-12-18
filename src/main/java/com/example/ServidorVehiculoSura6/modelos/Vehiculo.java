@@ -25,7 +25,7 @@ public class Vehiculo {
 
     private Integer siniestros;
 
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 10 , unique = true)
     private String placa;
 
     @Column(length = 255)
@@ -46,7 +46,7 @@ public class Vehiculo {
 
     // Constructor con todos los parámetros
 
-    public Vehiculo(Long id, String cilindraje, String color, String marca, String modelo, Integer siniestros, String placa, String descripcion, String poliza, Boolean activo, Usuario usuario) {
+    public Vehiculo(Long id, String cilindraje, String color, String marca, String modelo, Integer siniestros, String placa, String descripcion, String poliza, Boolean activo) {
         this.id = id;
         this.cilindraje = cilindraje;
         this.color = color;
@@ -57,7 +57,6 @@ public class Vehiculo {
         this.descripcion = descripcion;
         this.poliza = poliza;
         this.activo = activo;
-        this.usuario = usuario;
     }
 
 
@@ -142,13 +141,5 @@ public class Vehiculo {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 }

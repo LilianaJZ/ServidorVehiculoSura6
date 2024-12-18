@@ -23,7 +23,7 @@ public class Usuario {
     @Column(length = 20)
     private String telefono;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50, unique = true)
     private String cedula;
 
     @Column(nullable = false, length = 50)

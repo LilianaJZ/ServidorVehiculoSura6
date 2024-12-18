@@ -48,4 +48,54 @@ public class VehiculoServicio {
             throw  new Exception(error.getMessage());
         }
     }
+    // 4. Actualizar datos de un vehículo
+    public Optional<Vehiculo> actualizarVehiculo(Long id, Vehiculo datosActualizados) throws Exception {
+        try {
+            return iVehiculoRepositorio.findById(id)
+                    .map(vehiculo -> {
+                        vehiculo.setCilindraje(datosActualizados.getCilindraje());
+                        vehiculo.setColor(datosActualizados.getColor());
+                        vehiculo.setMarca(datosActualizados.getMarca());
+                        vehiculo.setModelo(datosActualizados.getModelo());
+                        vehiculo.setSiniestros(datosActualizados.getSiniestros());
+                        vehiculo.setPlaca(datosActualizados.getPlaca());
+                        vehiculo.setDescripcion(datosActualizados.getDescripcion());
+                        vehiculo.setPoliza(datosActualizados.getPoliza());
+                        vehiculo.setActivo(datosActualizados.getActivo());
+                        return iVehiculoRepositorio.save(vehiculo);
+                    });
+        } catch (Exception error) {
+            throw new Exception("Error al actualizar vehículo: " + error.getMessage());
+        }
+    }
+
+    // 5. Soft delete (pasar de activo a inactivo)
+    public Optional<String> desactivarVehiculo(Long id) throws Exception {
+        try {
+            return iVehiculoRepositorio.findById(id)
+                    .map(vehiculo -> {
+                        vehiculo.setActivo(false); // Cambiar el estado a inactivo
+                        iVehiculoRepositorio.save(vehiculo);
+                        return Optional.of("Vehículo desactivado correctamente");
+                    })
+                    .orElseThrow(() -> new Exception("Vehículo no encontrado"));
+        } catch (Exception error) {
+            throw new Exception("Error al desactivar vehículo: " + error.getMessage());
+        }
+    }
+
+    // 6. Eliminar un vehículo permanentemente
+    public Optional<String> eliminarVehiculo(Long id) throws Exception {
+        try {
+            return iVehiculoRepositorio.findById(id)
+                    .map(vehiculo -> {
+                        iVehiculoRepositorio.deleteById(id);
+                        return Optional.of("Vehículo eliminado permanentemente");
+                    })
+                    .orElseThrow(() -> new Exception("Vehículo no encontrado"));
+        } catch (Exception error) {
+            throw new Exception("Error al eliminar vehículo: " + error.getMessage());
+        }
+    }
+
 }

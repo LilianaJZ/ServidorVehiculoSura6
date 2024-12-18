@@ -21,7 +21,7 @@ public class UsuarioServicio {
     public Usuario guardarUsuario(Usuario datosUsuario)throws Exception {// se llama a usuario porque es donde lo quiero hacer y se le activan las excepciones
         try {
 
-            //datosUsuario.setFechaCreacion(LocalDate.now());
+           // datosUsuario.setActivo(true);// Asegurar que el usuario se crea como activo
             return iUsuarioRepositorio.save(datosUsuario);
         } catch (Exception error) {
             throw new Exception(error.getMessage());
@@ -51,4 +51,54 @@ public class UsuarioServicio {
             throw  new Exception(error.getMessage());
         }
     }
+
+    ///////////////////////////////////////////
+    // 4. Actualizar datos de un usuario.
+    public Optional<Usuario> actualizarUsuario(Long id, Usuario datosActualizados) throws Exception {
+        try {
+            return iUsuarioRepositorio.findById(id)
+                    .map(usuario -> {
+                        usuario.setNombre(datosActualizados.getNombre());
+                        usuario.setContrasena(datosActualizados.getContrasena());
+                        usuario.setTelefono(datosActualizados.getTelefono());
+                        usuario.setCedula(datosActualizados.getCedula());
+                        usuario.setCorreo(datosActualizados.getCorreo());
+                        usuario.setFecha_nacimiento(datosActualizados.getFecha_nacimiento());
+                        // Otros atributos que puedan ser modificables
+                        return iUsuarioRepositorio.save(usuario);
+                    });
+        } catch (Exception error) {
+            throw new Exception("Error al actualizar usuario: " + error.getMessage());
+        }
+    }
+    /////////////////////////////////////////
+    // 5. Soft delete (pasar de activo a inactivo).
+    public Optional<String> desactivarUsuario(Long id) throws Exception {
+        try {
+            return iUsuarioRepositorio.findById(id)
+                    .map(usuario -> {
+                        usuario.setActivo(false); // Cambiar el estado a inactivo
+                        iUsuarioRepositorio.save(usuario);
+                        return Optional.of("Usuario desactivado correctamente");
+                    })
+                    .orElseThrow(() -> new Exception("Usuario no encontrado"));
+        } catch (Exception error) {
+            throw new Exception("Error al desactivar usuario: " + error.getMessage());
+        }
+    }
+    //////////////////////////////////////////
+    // 6. Eliminar un usuario permanentemente.
+    public Optional<String> eliminarUsuario(Long id) throws Exception {
+        try {
+            return iUsuarioRepositorio.findById(id)
+                    .map(usuario -> {
+                        iUsuarioRepositorio.deleteById(id);
+                        return Optional.of("Usuario eliminado permanentemente");
+                    })
+                    .orElseThrow(() -> new Exception("Usuario no encontrado"));
+        } catch (Exception error) {
+            throw new Exception("Error al eliminar usuario: " + error.getMessage());
+        }
+    }
+
 }

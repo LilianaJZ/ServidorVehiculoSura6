@@ -57,4 +57,48 @@ public class ControladorVehiculo {
                     .body(error.getMessage());
         }
     }
+
+        // 4. Actualizar vehículo
+        @PutMapping("/{id}")
+        public ResponseEntity<?> actualizarVehiculo(@PathVariable Long id, @RequestBody Vehiculo datosActualizados) {
+            try {
+                return ResponseEntity
+                        .status(HttpStatus.OK)
+                        .body(vehiculoServicio.actualizarVehiculo(id, datosActualizados));
+            } catch (Exception error) {
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(error.getMessage());
+            }
+        }
+
+        ////////////////////////////
+        // 5. Soft delete (desactivar vehículo)
+        @PatchMapping("/desactivar/{id}")
+        public ResponseEntity<?> desactivarVehiculo(@PathVariable Long id) {
+            try {
+                return ResponseEntity
+                        .status(HttpStatus.OK)
+                        .body(vehiculoServicio.desactivarVehiculo(id));
+            } catch (Exception error) {
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(error.getMessage());
+            }
+        }
+
+        ////////////////////////////
+        // 6. Eliminar permanentemente vehículo
+        @DeleteMapping("/{id}")
+        public ResponseEntity<?> eliminarVehiculo(@PathVariable Long id) {
+            try {
+                return ResponseEntity
+                        .status(HttpStatus.OK)
+                        .body(vehiculoServicio.eliminarVehiculo(id));
+            } catch (Exception error) {
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body(error.getMessage());
+            }
+        }
 }
